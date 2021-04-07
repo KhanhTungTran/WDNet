@@ -2,4 +2,5 @@
 CLWD.rar
 /results
 /pascal_data
-
+/__pycache__
+/.vscode
