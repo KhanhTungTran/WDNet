@@ -10,7 +10,7 @@ class Getdata(torch.utils.data.Dataset):
 	def __init__(self):
 		self.transform_norm=transforms.Compose([transforms.ToTensor()])
 		self.transform_tensor= transforms.ToTensor()
-		root = './dataset/CLWD/train/'
+		root = './dataset/RVD/train/'
 		self.imageJ_path=osp.join(root,'Watermarked_image','%s.jpg')
 		self.imageI_path=osp.join(root,'Watermark_free_image','%s.jpg')
 		self.mask_path=osp.join(root,'Mask','%s.png')
@@ -20,7 +20,7 @@ class Getdata(torch.utils.data.Dataset):
 		self.root = root
 		self.transform= transforms
 		self.ids = list()
-		for file in os.listdir(root+'/Watermarked_image'):
+		for file in os.listdir(root+'Watermarked_image'):
 			#if(file[:-4]=='.jpg'):
 			self.ids.append(file.strip('.jpg'))
 	def __getitem__(self,index):

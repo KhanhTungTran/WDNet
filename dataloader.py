@@ -4,5 +4,5 @@ from get_data import Getdata
 def dataloader(dataset, input_size, batch_size):
 	data_loader=DataLoader(
             Getdata(),
-            batch_size=batch_size, shuffle=True, num_workers=6)
+            batch_size=batch_size, shuffle=True, num_workers=0)
 	return data_loader

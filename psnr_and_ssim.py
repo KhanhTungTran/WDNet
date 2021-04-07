@@ -44,8 +44,8 @@ def ssim(img1, img2, C1=0.01**2, C2=0.03**2):
 
     ssim_map =  (2*s1*s2 + C1) * (2*covar + C2) / ((s1*s1 + s2*s2 + C1) * (vari + C2))
     return numpy.mean(ssim_map)
-real_img_root="./dataset/CLWD/test/Watermark_free_image"
-mask_img_root="./dataset/CLWD/test/Mask"
+real_img_root="./dataset/RVD/test/Watermark_free_image"
+mask_img_root="./dataset/RVD/test/Mask"
 g_img_root='./results/result_img'
 g_img_path=osp.join(g_img_root,'%s.jpg')
 real_img_path=osp.join(real_img_root,'%s.jpg')

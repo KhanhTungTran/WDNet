@@ -145,7 +145,7 @@ class WDNet(object):
 
         # load dataset
         self.data_loader = dataloader(self.dataset, self.input_size, self.batch_size)
-        data = self.data_loader.__iter__().__next__()[0]
+        # data = self.data_loader.__iter__().__next__()[0]
         def weight_init(m):
           classname=m.__class__.__name__
           if isinstance(m, nn.Conv2d):

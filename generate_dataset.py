@@ -11,9 +11,9 @@ import torch
 #from compiler.ast import flatten
 CUDA_VISIBLE_DEVICES=3
 mark='train'
-root_logo = './CLWD/watermark_logo/white/'
+root_logo = './dataset/RVD/watermark_logo/'
 root_dataset='./pascal_data/train/VOC2012/JPEGImages/'
-root_train='./CLWD/'
+root_train='./dataset/RVD/'
 img_ids=list()
 img_path=osp.join(root_dataset,'%s.jpg')
 img_source_path=osp.join(root_train,mark,'Watermarked_image','%s.jpg')
@@ -51,13 +51,14 @@ def solve_balance(mask):
 	balance=balance.reshape(height,width)
 	return balance
 i=(int)(0)
-while i<60000:
+while i<5000:
 	for id in img_ids:
 		print(i)
-		if i>=60000:
+		if i>=5000:
 			break
 		img=Image.open(img_path%id)
-		logo_id=str(random.randint(0,63)).zfill(3)
+		# logo_id=str(random.randint(0,63)).zfill(3)
+		logo_id = '1'
 		logo=Image.open(logo_path%logo_id)
 		logo = logo.convert('RGBA')
 		img_height,img_width=img.size
@@ -68,8 +69,8 @@ while i<60000:
 		rotate_angle=random.randint(0,360)
 		logo_rotate=logo.rotate(rotate_angle,expand = True)
 		logo_height,logo_width=logo_rotate.size
-		logo_height=random.randint(10,256)
-		logo_width=random.randint(10,256)
+		logo_height=random.randint(50,256)
+		logo_width=random.randint(50,256)
 		logo_resize=logo_rotate.resize((logo_height,logo_width))
 		transform_totensor=transforms.Compose([transforms.ToTensor()])
 		#print(logo_resize.size)
@@ -77,7 +78,7 @@ while i<60000:
 		logo=transform_totensor(logo_resize)
 		img=img.cuda()
 		logo=logo.cuda()
-		alpha=random.random()*0.4+0.3
+		alpha=random.random()*0.3+0.4
 		start_height=random.randint(0,256-logo_height)
 		start_width=random.randint(0,256-logo_width)
 		W=torch.zeros_like(img)

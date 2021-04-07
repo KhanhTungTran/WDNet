@@ -8,18 +8,18 @@ import os.path as osp
 import os
 import time
 from torchvision import datasets, transforms
-os.environ["CUDA_VISIBLE_DEVICES"] =  "1"
+# os.environ["CUDA_VISIBLE_DEVICES"] =  "1"
 
 G=generator(3,3)
 G.eval()
 G.load_state_dict(torch.load(os.path.join('WDNet_G.pkl')))
 G.cuda()
 root = './dataset/CLWD/test'
-imageJ_path=osp.join(root,'Watermarked_image','%s.jpg')
+imageJ_path=osp.join(root,'rever_test','%s.jpg')
 img_save_path=osp.join('./results','result_img','%s.jpg')
 img_vision_path=osp.join('./results','result_vision','%s.jpg')
 ids = list()
-for file in os.listdir(root+'/Watermarked_image'):
+for file in os.listdir(root+'/rever_test'):
 			#if(file[:-4]=='.jpg'):
 			ids.append(file.strip('.jpg'))
 i=0
@@ -27,7 +27,7 @@ all_time=0.0
 for img_id in ids:
   i+=1
   transform_norm=transforms.Compose([transforms.ToTensor()])
-  img_J=Image.open(imageJ_path%img_id)
+  img_J=Image.open(imageJ_path%img_id).resize((256, 256))
   img_source = transform_norm(img_J)
   img_source=torch.unsqueeze(img_source.cuda(),0)
   st=time.time()
